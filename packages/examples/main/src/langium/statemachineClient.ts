@@ -17,6 +17,7 @@ import getAccessibilityServiceOverride from 'vscode/service-override/accessibili
 import { LogLevel } from 'vscode/services';
 // import { renderPanelPart } from 'vscode/service-override/views';
 import 'vscode/default-extensions/theme-defaults';
+import { initMyNotificationService } from './notificationService.js';
 
 import { buildWorkerDefinition } from 'monaco-editor-workers';
 buildWorkerDefinition('../../../node_modules/monaco-editor-workers/dist/workers/', new URL('', window.location.href).href, false);
@@ -143,7 +144,8 @@ try {
         enableAccessibilityService: false,
         userServices: {
             // manually add the accessibility service
-            ...getAccessibilityServiceOverride()
+            ...getAccessibilityServiceOverride(),
+            ...initMyNotificationService()
         },
         debugLogging: true,
         logLevel: LogLevel.Info
